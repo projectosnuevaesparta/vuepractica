@@ -74,7 +74,7 @@
 				this.loading = true
 				const key = this.apiKey;
 				const url = 'https://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country='+this.select+'&api_key='+key+'&format=json';
-				//const url = url.replace('select', select)
+				//const url = url.replace('sele ct', select)
 				axios.get(url)
 					.then(response => {
 						this.artist = response.data.topartists.artist
