@@ -19,7 +19,7 @@
 				<option v-for="c in countries" :value="c.value"> {{c.name}}</option>
 			</select>
 
-			<hr>
+			<hr> 
 			<transition name="fade" v-if="loading">
 				<spinner></spinner>
 			</transition>
