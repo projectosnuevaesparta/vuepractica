@@ -39,8 +39,9 @@
 	
 
 <script>
-	import config from '../config.js';
-	import spinner from './spinnerComponent';
+
+	//import spinner from './spinnerComponent';
+
 	const vue = new Vue({
 		el: '#application',
 		data:{
@@ -54,19 +55,20 @@
 				],
 				select: 'argentina',
 				loading: false
+				apiKey: '3354444a4c1b1bd580b0e3194aeef400',
 			}
 		},
 		components:{
 			spinner: spinner
 		},
 		
-		mounted(){
+		mounted:{
 			this.getArtis();
 		},
 		methods:{
 			getArtis(){
 				this.loading = true
-				const key = config.apiKey;
+				const key = this.apiKey;
 				const url = 'http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country='+this.select+'&api_key='+key+'&format=json';
 				//const url = url.replace('select', select)
 				axios.get(url)
@@ -83,16 +85,12 @@
 		}
 	});
 
+	Vue.component('spinner',
+		template: '<div class="spinner"><p>Cargando.......</p></div>',
+	);
 </script>
 <style scoped>
-.col-md-3{
-	width: 30%;
-	margin-right: 1%;
-	border: 2px solid #2a2a2a;
-	display: inline-block;
-	float: left;
-	margin-bottom: 10px;
-}
+
 
 </style>
 
