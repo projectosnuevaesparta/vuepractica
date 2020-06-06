@@ -15,6 +15,21 @@
 
 			{{mensaje}}
 
+			<hr>
+
+			<div class="col-md-3" v-for="a in artist" :key="a.mbid">
+				<div class="card">
+					<div class="card-header">
+						{{a.name}}
+					</div>
+					<div class="card-body">
+						<img :src="a.image[2]['#text']">
+					</div>
+					<div class="card-footer"></div>
+				</div>
+				<hr>
+			</div>
+
 		</div>
 	</div>
 
@@ -22,26 +37,64 @@
 <script type="text/javascript" src="js/axios.min.js"></script>
 
 	
-	<script>
 
-        Vue.use(vue, axios);
-
-		import app from './components/App.vue';
-
-		const vue = new Vue({
-
-
-			el: '#application',
-			data: {
-				mensaje: 'Hola practica con vue',
-			},
-			components:{
-				app: app
+<script>
+	import config from '../config.js';
+	import spinner from './spinnerComponent';
+	const vue = new Vue({
+		el: '#application',
+		data:{
+			return{
+				mensaje: 'hola',
+				artist: [],
+				countries:[
+					{name: 'España', value: 'spain'},
+					{name: 'Colombia', value: 'colombia'},
+					{name: 'Argentina', value: 'argentina'},
+				],
+				select: 'argentina',
+				loading: false
 			}
+		},
+		components:{
+			spinner: spinner
+		},
+		
+		mounted(){
+			this.getArtis();
+		},
+		methods:{
+			getArtis(){
+				this.loading = true
+				const key = config.apiKey;
+				const url = 'http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country='+this.select+'&api_key='+key+'&format=json';
+				//const url = url.replace('select', select)
+				axios.get(url)
+					.then(response => {
+						this.artist = response.data.topartists.artist
+						this.loading = false
+					})
+			}
+		},
+		watch: {
+			select(){
+				this.getArtis();
+			}
+		}
+	});
 
-		});
-	</script>
+</script>
+<style scoped>
+.col-md-3{
+	width: 30%;
+	margin-right: 1%;
+	border: 2px solid #2a2a2a;
+	display: inline-block;
+	float: left;
+	margin-bottom: 10px;
+}
 
+</style>
 
 </body>
 </html>
