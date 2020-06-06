@@ -15,13 +15,17 @@
 
 			{{mensaje}}
 
+			<select v-model="select">
+				<option v-for="c in countries" :value="c.value"> {{c.name}}</option>
+			</select>
+
 			<hr>
 			<transition name="fade" v-if="loading">
 				<spinner></spinner>
 			</transition>
 
 			<div class="col-md-3" v-for="a in artist" :key="a.mbid">
-				<div class="card">
+				<div class="card w-100">
 					<div class="card-header">
 						{{a.name}}
 					</div>
