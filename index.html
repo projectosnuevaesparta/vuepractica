@@ -23,9 +23,16 @@
 
 	
 	<script>
+		import vue from 'vue';
+        import axios from 'axios';
+
+        Vue.use(vue, axios);
+
 		import app from './components/App.vue';
 
 		const vue = new Vue({
+
+
 			el: '#application',
 			data: {
 				mensaje: 'Hola practica con vue',
