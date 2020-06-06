@@ -16,6 +16,9 @@
 			{{mensaje}}
 
 			<hr>
+			<transition name="fade" v-if="loading">
+				<spinner></spinner>
+			</transition>
 
 			<div class="col-md-3" v-for="a in artist" :key="a.mbid">
 				<div class="card">
@@ -41,7 +44,6 @@
 <script>
 
 	Vue.component('spinner', {
-			name: 'spinner',
 			template: '<div class="spinner"><p>Cargando.......</p></div>',
 		}
 	);
@@ -62,7 +64,6 @@
 
 		},
 		components:{
-			spinner
 		},
 		
 		mounted(){
