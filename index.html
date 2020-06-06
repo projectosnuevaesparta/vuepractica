@@ -40,7 +40,10 @@
 
 <script>
 
-	//import spinner from './spinnerComponent';
+	Vue.component('spinner', {
+			template: '<div class="spinner"><p>Cargando.......</p></div>',
+		}
+	);
 
 	const vue = new Vue({
 		el: '#application',
@@ -84,10 +87,7 @@
 		}
 	});
 
-	Vue.component('spinner', {
-			template: '<div class="spinner"><p>Cargando.......</p></div>',
-		}
-	);
+	
 </script>
 <style scoped>
 
